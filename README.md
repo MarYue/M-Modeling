@@ -1,3 +1,5 @@
 # M-Modeling
-Have a Try
+
 WePet
+还需要配置服务器域名~
+然后信息发布、个人信息中心还没有实现...
