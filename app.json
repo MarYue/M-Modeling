@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/index",
+    "pages/my/info",
+    "pages/my/list",
+    "pages/my/fav",
+    "pages/my/mydyn",
+    "pages/info/index",
+    "pages/info/add",
+    "pages/info/edit",
+    "pages/dynamic/index",
+    "pages/dynamic/add",
+    "pages/comment/index",
+    "pages/msg/index",
+    "pages/my/appointment",
+    "pages/appointment/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "black",
+    "navigationBarBackgroundColor": "#f4de3b",
+    "navigationBarTitleText": "微宠帮",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#ddc40b",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "领养",
+        "iconPath": "img/adopt.png",
+        "selectedIconPath": "img/adopt1.png"
+      },
+      {
+        "pagePath": "pages/msg/index",
+        "text": "寻宠",
+        "iconPath": "img/find.png",
+        "selectedIconPath": "img/find1.png"
+      },
+      {
+        "pagePath": "pages/dynamic/index",
+        "text": "资讯",
+        "iconPath": "img/auto.png",
+        "selectedIconPath": "img/auto1.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "img/account.png",
+        "selectedIconPath": "img/account1.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
