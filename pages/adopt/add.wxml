@@ -1,0 +1,93 @@
+<view class="page">
+  <view class="page__bd">
+
+    <view class="weui-tab">
+
+      <view>
+
+        <view class="weui-tab__content" >
+          <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
+
+          <form bindsubmit="formSubmit">
+            <view class="weui-cells__title">您完善的个人联系信息将会在发布信息后进行公开</view>
+            <view class="weui-cells weui-cells_after-title">
+              
+            </view>
+
+            <view class="weui-cells__title">填写领养信息</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">标题</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="title" placeholder="请输入简要介绍的标题" bindchange="titleChanged" />
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">宠物所在地</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="departure" placeholder="请输入宠物所在地" bindchange="departureChanged" />
+                </view>
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">生活目的地</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="destination" placeholder="请输入宠物目的地" bindchange="destinationChanged" />
+                </view>
+              </view>
+              <!-- <image src="/img/to.png" class="to1"></image> -->
+
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">领养日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker mode="date" name="date" value="{{date}}" start="{{startDate}}" end="{{endDate}}" bindchange="dateChanged">
+                    <view class="weui-input">{{date}}</view>
+                  </picker>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </view>
+
+            </view>
+            <view class="weui-cells__title">其他信息</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <textarea class="weui-textarea" name="supplementary" placeholder="更多情况,请输入说明" value="{{supplementary}}" style="height: 3.3em" />
+                </view>
+              </view>
+            </view>
+
+            <checkbox-group bindchange="agreeChanged" name="isAgree">
+              <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                  <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                  <view class="weui-agree__checkbox-icon">
+                    <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                  </view>
+                  阅读并同意
+                  <navigator url="/pages/notice/index?id=1" class="weui-agree__link">《信息发布须知》</navigator>
+                </view>
+              </label>
+            </checkbox-group>
+
+            <view class="weui-btn-area">
+              <button disabled="{{isAgree ? false : true}}" class="weui-btn" type="{{isAgree ? 'primary' : 'disabled'}}" formType="submit">确定</button>
+            </view>
+
+          </form>
+        </view>
+      </view>
+
+
+    </view>
+  </view>
+
+
+</view>

@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">{{adoption.title}}</view>
+    <view class="page__desc">发布者：{{adoption.user.nickName}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-article">
+
+      <view class="weui-article__p">
+        宠物所在地：{{adoption.from}}
+      </view>
+
+      <view class="weui-article__p">
+        宠物目的地：{{adoption.to}}
+      </view>
+
+      <view class="weui-article__p">
+        领养时间：{{adoption.displayableAdoptTime}}
+      </view>
+
+      <view class="weui-article__p">
+        补充信息：{{adoption.supplementary}}
+      </view>
+
+      <view class="weui-article__p">
+        信息发布时间：{{adoption.displayableLastUpdated}}
+      </view>
+
+      <view class="weui-article__p">
+        发布者联系电话：{{adoption.user.tel}}
+      </view>
+
+      <view class="weui-article__p">
+        若有意领养，请与发布者联系。
+      </view>
+    </view>
+  </view>
+</view>

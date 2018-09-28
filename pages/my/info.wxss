@@ -4,3 +4,6 @@
 .form .weui-cells{z-index: 0;}
 .form .weui-input{overflow: hidden;}
 .weui-btn{background: #f4de3b!important;color:#000!important;}
+
+.weixinNickName .weui-label{color: green;}
+.weixinNickName .weui-input{color: green;}

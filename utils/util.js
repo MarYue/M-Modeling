@@ -16,21 +16,21 @@ function formatNumber(n) {
 }
 
 //服务器
-//var rootDocment = '  ';
+var rootDocment = 'https://mp.shunwww.cn/api';
 
-//修改成你的appid及appsecret
-var AppConf = {
-  'appid': 'wx6d42e81a9d1c4438', 'appsecret': '13fd571b4808e327624666067a57961d'
-};
-
-function req(url, data, cb) {
-  data.appid = AppConf.appid;
-  data.appsecret = AppConf.appsecret;
+function post(url, data, cb, method='post') {
+  console.log(method, rootDocment + url, data)
+  var header = {
+    'Content-Type': 'application/json',
+    'uid': getApp().globalData.sessionInfo ? getApp().globalData.sessionInfo['_id'] : undefined,
+    'openId': getApp().globalData.sessionInfo ? getApp().globalData.sessionInfo['openId'] : undefined,
+  }
+  console.log(header)
   wx.request({
     url: rootDocment + url,
-    data: data,
-    method: 'post',
-    header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    data: JSON.stringify(data),
+    method: method,
+    header: header,
     success: function (res) {
       return typeof cb == "function" && cb(res.data)
     },
@@ -40,21 +40,8 @@ function req(url, data, cb) {
   })
 }
 
-function getReq(url, data, cb) {
-  data.appid = AppConf.appid;
-  data.appsecret = AppConf.appsecret;
-  wx.request({
-    url: rootDocment + url,
-    data: data,
-    method: 'get',
-    header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    success: function (res) {
-      return typeof cb == "function" && cb(res.data)
-    },
-    fail: function () {
-      return typeof cb == "function" && cb(false)
-    }
-  })
+function gett(url, cb) {
+  return post(url, {}, cb, 'get');
 }
 
 // 去前后空格  
@@ -155,11 +142,11 @@ function escape2Html(str) {
 
 module.exports = {
   formatTime: formatTime,
-  req: req,
+  post: post,
+  gett: gett,
   trim: trim,
   isError: isError,
   clearError: clearError,
-  getReq: getReq,
   getDateDiff: getDateDiff,
   escape2Html: escape2Html,
   getDateBiff: getDateBiff

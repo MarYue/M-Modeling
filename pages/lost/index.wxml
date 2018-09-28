@@ -1,0 +1,137 @@
+<view class="page">
+  <view class="page__bd">
+
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" catchtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}; transform: translateX({{sliderOffset}}vw); -webkit-transform: translateX({{sliderOffset}}vw);"></view>
+      </view>
+      <view class="weui-tab__panel">
+
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view>
+            <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
+
+            <form disabled="{{formDisabled}}" bindsubmit="formSubmit">
+              <view class="weui-cells__title">请先在“我的”完善个人信息</view>
+
+              <view class="weui-cells__title">填写寻宠信息</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label">信息类别</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker mode="selector" name="lnfType" value="{{lnf.lnfType}}" range="{{lnfTypeRange}}" bindchange="lnfTypeChanged">
+                      <view class="weui-input">{{lnfTypeRange[lnf.lnfType]}}</view>
+                    </picker>
+                  </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label">标题</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="title" placeholder="请输入简要情况介绍" />
+                  </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label">地点</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" name="place" placeholder="请输入地点" />
+                  </view>
+                </view>
+
+                <!-- <image src="/img/to.png" class="to1"></image> -->
+
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label">日期</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker mode="date" name="dateInput" value="{{lnf.dateInput}}" start="{{startDate}}" end="{{endDate}}" bindchange="dateInputChanged">
+                      <view class="weui-input">{{lnf.dateInput}}</view>
+                    </picker>
+                  </view>
+                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                    <view class="weui-label">时间</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker mode="time" name="timeInput" value="{{lnf.timeInput}}" start="00:00" end="23:59" bindchange="timeInputChanged">
+                      <view class="weui-input">{{lnf.timeInput}}</view>
+                    </picker>
+                  </view>
+                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+
+              </view>
+              <view class="weui-cells__title">其他信息</view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" name="supplementary" placeholder="更多情况,请输入说明" style="height: 3.3em" />
+                  </view>
+                </view>
+              </view>
+
+              <checkbox-group bindchange="agreeChanged" name="isAgree">
+                <label class="weui-agree" for="weuiAgree">
+                  <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                      <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                    </view>
+                    阅读并同意
+                    <navigator url="/pages/notice/index?id=1" class="weui-agree__link">《信息发布须知》</navigator>
+                  </view>
+                </label>
+              </checkbox-group>
+
+              <view class="weui-btn-area">
+              <button disabled="{{isAgree && !formDisabled ? false : true}}" class="weui-btn" type="{{isAgree && !formDisabled ? 'primary' : 'disabled'}}" formType="submit">确定</button>
+            </view>
+
+            </form>
+          </view>
+        </view>
+
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view class="weui-panel__bd">
+            <navigator wx:for="{{contentList}}" wx:key="id" url="../../pages/lost/view?id={{item._id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <!--<view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{item.avatarUrl}}" ></image>
+              </view>-->
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{item.title}}</view>
+                <view class="weui-media-box__desc"> {{item.displayableTime}} 在 {{item.place}} {{item.displayableType}}</view>
+              </view>
+            </navigator>
+          </view>
+          <view class="page__bd">
+            <view class="weui-loadmore" bindtap="onReachBottom" wx:if="{{!nomore}}">
+              <view class="weui-loading"></view>
+              <view class="weui-loadmore__tips">{{ loadBottomInProgress ? "正在加载汪~" : "点这里刷新汪~" }}</view>
+            </view>
+
+            <view class="weui-loadmore weui-loadmore_line" wx:if="{{nomore}}">
+              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了喵~</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+    </view>
+  </view>
+
+
+</view>
